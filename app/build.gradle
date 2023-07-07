@@ -1,0 +1,192 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    google()
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+
+}
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+android {
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
+    defaultConfig {
+        applicationId "com.nts.tichhopvoipsdk"
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode 10
+        versionName "1.0.3"
+        multiDexEnabled true
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    packagingOptions {
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+        pickFirst 'META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version'
+        pickFirst 'android.support.v13.view.DragAndDropPermissionsCompat'
+        exclude 'META-INF/MANIFEST.MF'
+        pickFirst 'META-INF/com/android/build/gradle/aar-metadata.properties'
+        exclude 'AndroidManifest.xml'
+        exclude 'assets/*/*'
+        exclude 'res/anim/default_dialog_in.xml'
+    }
+    buildTypes {
+        debug {
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+
+
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+}
+
+dependencies {
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/softphone-release.aar')
+
+
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation "org.assertj:assertj-core:3.11.1"
+    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'com.github.tamir7.contacts:contacts:1.1.7'
+    implementation 'com.google.android.play:core-ktx:1.8.1'
+    implementation 'com.google.code.gson:gson:2.7'
+    implementation 'com.parse.bolts:bolts-android:1.4.0'
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
+
+    def room_version = "2.5.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+//    annotationProcessor "androidx.arch.persistence.room:compiler:$room_version"
+
+//    // To use Kotlin annotation processing tool (kapt)
+
+    // optional - RxJava2 support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    // optional - RxJava3 support for Room
+    implementation "androidx.room:room-rxjava3:$room_version"
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$room_version"
+
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    // optional - Paging 3 Integration
+    implementation "androidx.room:room-paging:$room_version"
+
+    implementation 'com.android.volley:volley:1.2.0'
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection")
+    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+    implementation 'com.afollestad.material-dialogs:core:0.9.4.2'
+    implementation 'br.com.simplepass:loading-button-android:2.2.0'
+
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'com.auth0:java-jwt:4.0.0'
+
+
+    implementation 'com.github.aabhasr1:OtpView:v1.1.2'
+
+
+//    implementation 'org.linphone:linphone-sdk-android:5.2+'
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.media:media:1.6.0'
+
+    //firebase
+    implementation platform('com.google.firebase:firebase-bom:30.3.2')
+
+    implementation 'com.google.firebase:firebase-crashlytics-ndk'
+    implementation "androidx.security:security-crypto-ktx:1.1.0-alpha03"
+
+
+    // https://github.com/coil-kt/coil/blob/main/LICENSE.txt Apache v2.0
+    def coil_version = "2.2.2"
+    implementation("io.coil-kt:coil:$coil_version")
+    implementation("io.coil-kt:coil-gif:$coil_version")
+    implementation("io.coil-kt:coil-svg:$coil_version")
+    implementation("io.coil-kt:coil-video:$coil_version")
+    implementation "androidx.window:window:1.0.0"
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4'
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
+    def groupie_version = "2.10.1"
+
+    /*https://github.com/airbnb/lottie-android*/
+    implementation 'com.airbnb.android:lottie:5.2.0'
+    //SignatureView
+    implementation 'com.kyanogen.signatureview:signature-view:1.2'
+    implementation 'io.realm.kotlin:library-base:1.7.0' // Add to use local realm (no sync)
+    implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.3'
+
+
+}
+
+

@@ -1,0 +1,24 @@
+buildscript {
+    ext.kotlin_version = '1.8.10'
+    ext.VERSION_PLAY_SERVICES = '17.0.0'
+
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+
+    }
+}
