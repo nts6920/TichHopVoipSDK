@@ -6,9 +6,7 @@ repositories {
     mavenCentral()
     jcenter()
     google()
-    flatDir {
-        dirs 'libs'
-    }
+
     maven {
         url "https://jitpack.io"
     }
@@ -21,6 +19,7 @@ buildscript {
 }
 
 android {
+    namespace 'com.nts.tichhopvoipsdk'
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
     defaultConfig {
@@ -46,31 +45,22 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
     packagingOptions {
         pickFirst 'lib/arm64-v8a/libc++_shared.so'
         pickFirst 'lib/armeabi-v7a/libc++_shared.so'
         pickFirst 'lib/x86/libc++_shared.so'
         pickFirst 'lib/x86_64/libc++_shared.so'
-        pickFirst 'META-INF/androidx.localbroadcastmanager_localbroadcastmanager.version'
-        pickFirst 'android.support.v13.view.DragAndDropPermissionsCompat'
-        exclude 'META-INF/MANIFEST.MF'
-        pickFirst 'META-INF/com/android/build/gradle/aar-metadata.properties'
-        exclude 'AndroidManifest.xml'
-        exclude 'assets/*/*'
-        exclude 'res/anim/default_dialog_in.xml'
     }
+
     buildTypes {
         debug {
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-
-
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
         }
     }
 
@@ -78,7 +68,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
 
 }
 
@@ -171,7 +160,6 @@ dependencies {
     implementation "androidx.security:security-crypto-ktx:1.1.0-alpha03"
 
 
-    // https://github.com/coil-kt/coil/blob/main/LICENSE.txt Apache v2.0
     def coil_version = "2.2.2"
     implementation("io.coil-kt:coil:$coil_version")
     implementation("io.coil-kt:coil-gif:$coil_version")
