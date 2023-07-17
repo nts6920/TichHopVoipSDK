@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.g99.databinding.ActivityGtalkBinding;
 import com.g99.linphone.activities.voip.CallActivity;
+import com.g99.linphone.activities.voip.fragments.IncomingCallFragment;
 import com.g99.voip.CallbackValue;
 import com.g99.voip.SDKManager;
 import com.g99.voip.UserInfo;
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.btn);
 
-        Intent intent = new Intent(this, CallActivity.class);
+
 
         button.setOnClickListener(view -> {
 
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                             Snackbar.make(view, "No support", Snackbar.LENGTH_LONG).show();
                         }
                     }).start();
-
         });
 
     }
