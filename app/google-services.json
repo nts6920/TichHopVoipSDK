@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "280006723774",
+    "project_id": "tichhopvoipsdk",
+    "storage_bucket": "tichhopvoipsdk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280006723774:android:8e29038f596901078eb6ef",
+        "android_client_info": {
+          "package_name": "com.nts.tichhopvoipsdk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280006723774-rerlng17msfo76g9fg6e981klr43bp90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqrfjDDamkQ2BfF1mvjNZSPD26bdP05d0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280006723774-rerlng17msfo76g9fg6e981klr43bp90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

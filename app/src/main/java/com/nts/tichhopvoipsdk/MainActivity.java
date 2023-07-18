@@ -39,13 +39,7 @@ public class MainActivity extends AppCompatActivity {
             userInfo.setIdentification_no(identification);
             userInfo.setUid(uID);
 
-            SDKManager.Companion.init(getApplication()).setUserInfo(userInfo).setCallbackListener((callbackValue) -> {
-                        if (callbackValue == CallbackValue.REQUIRED_LOGIN) {
-                            Toast.makeText(this, "replaceLoginActivity", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Snackbar.make(view, "No support", Snackbar.LENGTH_LONG).show();
-                        }
-                    }).start();
+            SDKManager.Companion.init(getApplication()).setUserInfo(userInfo).start();
         });
 
     }
