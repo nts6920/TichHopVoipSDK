@@ -9,14 +9,20 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.g99.linphone.activities.voip.CallActivity;
+import com.g99.voip.CallbackValue;
 import com.g99.voip.SDKManager;
+import com.g99.voip.UserInfo;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -31,6 +37,31 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public static final String VOIPCALL = "VOIPCALL";
     private NotificationManager mNotificationManager;
 
+    String mobile = "0973385525";
+    int merchantId = 1;
+    String customer = "Nguyen Duc Vinh";
+    String identification = "033080007111";
+    String uID = "999999999";
+    private static final Handler sHandler = new Handler(Looper.getMainLooper());
+
+    private Runnable mPushReceivedRunnable = () -> {
+        if (SDKManager.Companion.getInstance() == null) {
+            UserInfo userInfo = new UserInfo();
+            userInfo.setMobile(mobile);
+            userInfo.setMerchant_id(merchantId);
+            userInfo.setCustomer(customer);
+            userInfo.setIdentification_no(identification);
+            userInfo.setUid(uID);
+
+            SDKManager.Companion.init(getApplication()).setUserInfo(userInfo).setCallbackListener((callbackValue) -> {
+                if (callbackValue == CallbackValue.REQUIRED_LOGIN) {
+                    Toast.makeText(this, "replaceLoginActivity", Toast.LENGTH_SHORT).show();
+                }
+            }).start();
+        }
+    };
+
+
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
@@ -39,6 +70,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d("TAG", "Message data payload: " + remoteMessage.getData());
             String typePush = remoteMessage.getData().get("type");
             Log.d("TAG", "typePush..." + typePush);
+            sHandler.post(mPushReceivedRunnable);
 
             if (typePush.equals(TYPE_ORDER_NUMBER)) {
                 JSONObject json = new JSONObject(remoteMessage.getData());
@@ -50,9 +82,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 JSONObject json = new JSONObject(remoteMessage.getData());
                 sendNotification(json);
             } else {
+                sHandler.post(mPushReceivedRunnable);
                 JSONObject json = new JSONObject(remoteMessage.getData());
                 sendNotification(json);
-
             }
         }
 
